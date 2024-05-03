@@ -3,6 +3,16 @@ entries:
   hello-world:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-05-03T02:17:38.686567405Z"
+    description: A Helm chart for Kubernetes
+    digest: 9087ccb4603e89971355d72adcf0baed6e5a7bfb4a15c724ed38be3060a6d1b5
+    name: hello-world
+    type: application
+    urls:
+    - https://github.com/jgkawell/helm-charts/releases/download/hello-world-1.0.0-alpha/hello-world-1.0.0-alpha.tgz
+    version: 1.0.0-alpha
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-05-03T02:05:00.655536282Z"
     description: A Helm chart for Kubernetes
     digest: 6cd4a46d9df52d99cf878324fddd812768ac0f7d60aefcf2b7e92bd959a45b92
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/jgkawell/helm-charts/releases/download/hello-world-0.1.0/hello-world-0.1.0.tgz
     version: 0.1.0
-generated: "2024-05-03T02:05:00.655549186Z"
+generated: "2024-05-03T02:17:38.686587332Z"
