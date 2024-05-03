@@ -1,0 +1,27 @@
+image:
+  # This is to support Immich: https://github.com/immich-app/immich/releases/tag/v1.90.0
+  repository: tensorchord/pgvecto-rs
+  pullPolicy: IfNotPresent
+  tag: ""
+
+namespaceOverride: ""
+
+service:
+  name: postgres
+  port: 5432
+
+nodeAffinity:
+  hostname: "k8s-worker-2"
+
+login:
+  user: postgres
+  password: postgres
+
+postgres:
+  database: postgres
+
+storage:
+  capacity: 10Gi
+  hostPath: /mnt/k8s-pvs
+
+
