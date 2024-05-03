@@ -51,4 +51,15 @@ entries:
     urls:
     - https://github.com/jgkawell/helm-charts/releases/download/hello-world-0.1.0/hello-world-0.1.0.tgz
     version: 0.1.0
-generated: "2024-05-03T02:46:43.808906183Z"
+  postgres:
+  - apiVersion: v2
+    appVersion: pg15-v0.2.0
+    created: "2024-05-03T22:35:47.634045875Z"
+    description: A Helm chart for Kubernetes
+    digest: fff3f8b147e76e2527458f5814cae355ab7f4503aac498f5db5c5d2b5cde1306
+    name: postgres
+    type: application
+    urls:
+    - https://github.com/jgkawell/helm-charts/releases/download/postgres-1.0.0/postgres-1.0.0.tgz
+    version: 1.0.0
+generated: "2024-05-03T22:35:47.634068077Z"
