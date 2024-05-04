@@ -60,3 +60,7 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "hello-world.namespace" -}}
+{{- default .Release.Name .Values.namespaceOverride }}
+{{- end }}
