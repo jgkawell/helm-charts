@@ -4,6 +4,7 @@ metadata:
   name: {{ include "hello-world.fullname" . }}
   labels:
     {{- include "hello-world.labels" . | nindent 4 }}
+  namespace: {{ include "hello-world.namespace" . }}
 spec:
   type: {{ .Values.service.type }}
   ports:
