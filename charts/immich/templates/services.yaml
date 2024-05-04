@@ -1,0 +1,35 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: "{{ .Release.Name }}-server"
+  namespace: {{ include "helpers.namespace" . }}
+spec:
+  ports:
+  - name: http
+    port: {{ .Values.services.server.port }}
+  selector:
+    app: {{ .Values.services.server.name }}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: "{{ .Release.Name }}-machine-learning"
+  namespace: {{ include "helpers.namespace" . }}
+spec:
+  ports:
+  - name: http
+    port: {{ .Values.services.machineLearning.port }}
+  selector:
+    app: {{ .Values.services.machineLearning.name }}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: "{{ .Release.Name }}-redis"
+  namespace: {{ include "helpers.namespace" . }}
+spec:
+  ports:
+  - name: redis
+    port: {{ .Values.services.redis.port }}
+  selector:
+    app: {{ .Values.services.redis.name }}

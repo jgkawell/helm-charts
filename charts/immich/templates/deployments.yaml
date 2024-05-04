@@ -1,0 +1,186 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ include "helpers.namespace" . }}
+  labels:
+    app: {{ .Values.services.server.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.services.server.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.services.server.name }}
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - "{{ .Values.nodeAffinity.hostname }}"
+      containers:
+        - name: immich-server
+          image:  "{{ .Values.images.server.repository }}:{{ .Values.images.server.tag | default .Chart.AppVersion }}"
+          ports:
+            - containerPort: {{ .Values.services.server.port }}
+              name: http
+          command:
+            - './start.sh'
+          args:
+            - 'immich'
+          env:
+            - name: DB_HOSTNAME
+              value: {{ .Values.database.host }}
+            - name: DB_DATABASE_NAME
+              value: {{ .Values.database.name }}
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: db-username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: db-password
+            - name: REDIS_HOSTNAME
+              value: {{ .Release.Name }}-redis
+            - name: IMMICH_MACHINE_LEARNING_URL
+              value: "http://{{ .Release.Name }}-machine-learning:{{ .Values.services.machineLearning.port }}"
+          volumeMounts:
+            - name: uploads
+              mountPath: /usr/src/app/upload
+      volumes:
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-microservices
+  namespace: {{ include "helpers.namespace" . }}
+  labels:
+    app: {{ .Values.services.server.name }}-microservices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.services.server.name }}-microservices
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.services.server.name }}-microservices
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - "{{ .Values.nodeAffinity.hostname }}"
+      containers:
+        - name: immich-microservices
+          image:  "{{ .Values.images.server.repository }}:{{ .Values.images.server.tag | default .Chart.AppVersion }}"
+          command:
+            - './start.sh'
+          args:
+            - 'microservices'
+          env:
+            - name: DB_HOSTNAME
+              value: {{ .Values.database.host }}
+            - name: DB_DATABASE_NAME
+              value: {{ .Values.database.name }}
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: db-username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: db-password
+            - name: REDIS_HOSTNAME
+              value: {{ .Release.Name }}-redis
+            - name: IMMICH_MACHINE_LEARNING_URL
+              value: "http://{{ .Release.Name }}-machine-learning:{{ .Values.services.machineLearning.port }}"
+          volumeMounts:
+            - name: uploads
+              mountPath: /usr/src/app/upload
+      volumes:
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-machine-learning
+  namespace: {{ include "helpers.namespace" . }}
+  labels:
+    app: {{ .Values.services.machineLearning.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.services.machineLearning.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.services.machineLearning.name }}
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - "{{ .Values.nodeAffinity.hostname }}"
+      containers:
+        - name: immich-machine-learning
+          image:  "{{ .Values.images.machineLearning.repository }}:{{ .Values.images.machineLearning.tag | default .Chart.AppVersion }}"
+          ports:
+            - containerPort: {{ .Values.services.machineLearning.port }}
+              name: http
+          volumeMounts:
+            - name: model-cache
+              mountPath: /cache
+      volumes:
+        - name: model-cache
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-model-cache
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-redis
+  namespace: {{ include "helpers.namespace" . }}
+  labels:
+    app: {{ .Values.services.redis.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.services.redis.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.services.redis.name }}
+    spec:
+      containers:
+        - name: redis
+          image: "{{ .Values.images.redis.repository }}:{{ .Values.images.redis.tag }}"
+          ports:
+            - containerPort: {{ .Values.services.redis.port }}
+              name: redis

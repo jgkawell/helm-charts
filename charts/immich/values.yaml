@@ -1,0 +1,39 @@
+images:
+  server:
+    repository: ghcr.io/immich-app/immich-server
+    pullPolicy: IfNotPresent
+    tag: ''
+  machineLearning:
+    repository: ghcr.io/immich-app/immich-machine-learning
+    pullPolicy: IfNotPresent
+    tag: ''
+  redis:
+    repository: redis
+    pullPolicy: IfNotPresent
+    tag: '6.2.5-alpine'
+
+namespaceOverride: ''
+
+services:
+  server:
+    name: immich-server
+    port: 3001
+  machineLearning:
+    name: immich-machine-learning
+    port: 3003
+  redis:
+    name: immich-redis
+    port: 6379
+
+database:
+  host: home-cloud-postgres.home-cloud-postgres.svc.cluster.local
+  name: immich
+  user: immich
+  password: immich
+
+nodeAffinity:
+  hostname: 'k8s-worker-2'
+
+storage:
+  capacity: 10Gi
+  hostPath: /mnt/k8s-pvs
