@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: {{ .Release.Name }}
-  namespace: {{ include "postgres.namespace" . }}
+  namespace: {{ include "helpers.namespace" . }}
 spec:
   ports:
   - name: postgres
