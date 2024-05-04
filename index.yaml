@@ -3,6 +3,16 @@ entries:
   hello-world:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-05-04T05:19:34.850345734Z"
+    description: A Helm chart for Kubernetes
+    digest: c6858e11400e02e3eec2a924926d114c571bb6223833fc51a2e5dc284b6381dc
+    name: hello-world
+    type: application
+    urls:
+    - https://github.com/jgkawell/helm-charts/releases/download/hello-world-1.1.0/hello-world-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-05-03T02:46:43.808881197Z"
     description: A Helm chart for Kubernetes
     digest: e4403d630c0e876b9d278994f5ec9fa2147a6687cfcd7c2741810ccff97e24a2
@@ -51,7 +61,28 @@ entries:
     urls:
     - https://github.com/jgkawell/helm-charts/releases/download/hello-world-0.1.0/hello-world-0.1.0.tgz
     version: 0.1.0
+  immich:
+  - apiVersion: v2
+    appVersion: v1.101.0
+    created: "2024-05-04T05:19:34.922518876Z"
+    description: A Helm chart for Kubernetes
+    digest: 603f9bf363761654053006f451585a6b79c1102e21bee7c47941275d2442ffec
+    name: immich
+    type: application
+    urls:
+    - https://github.com/jgkawell/helm-charts/releases/download/immich-1.0.0/immich-1.0.0.tgz
+    version: 1.0.0
   postgres:
+  - apiVersion: v2
+    appVersion: pg15-v0.2.0
+    created: "2024-05-04T05:19:34.997630949Z"
+    description: A Helm chart for Kubernetes
+    digest: 73c21b36f45f03adfe1f2bc43ec7c1fa8616fc4cd42d227bb170bfe03d25db87
+    name: postgres
+    type: application
+    urls:
+    - https://github.com/jgkawell/helm-charts/releases/download/postgres-1.0.1/postgres-1.0.1.tgz
+    version: 1.0.1
   - apiVersion: v2
     appVersion: pg15-v0.2.0
     created: "2024-05-03T22:35:47.634045875Z"
@@ -62,4 +93,4 @@ entries:
     urls:
     - https://github.com/jgkawell/helm-charts/releases/download/postgres-1.0.0/postgres-1.0.0.tgz
     version: 1.0.0
-generated: "2024-05-03T22:35:47.634068077Z"
+generated: "2024-05-04T05:19:34.997665674Z"
