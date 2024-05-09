@@ -13,6 +13,7 @@ images:
     tag: '6.2.5-alpine'
 
 namespaceOverride: ''
+externalDomain: immich.local
 
 services:
   server:
@@ -26,7 +27,7 @@ services:
     port: 6379
 
 database:
-  host: home-cloud-postgres.home-cloud-postgres.svc.cluster.local
+  host: postgres.home-cloud-postgres.svc.cluster.local
   name: immich
   user: immich
   password: immich

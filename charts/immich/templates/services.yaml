@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: "{{ .Release.Name }}-server"
+  name: {{ .Values.services.server.name }}
   namespace: {{ include "helpers.namespace" . }}
 spec:
   ports:
@@ -13,7 +13,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: "{{ .Release.Name }}-machine-learning"
+  name: {{ .Values.services.machineLearning.name }}
   namespace: {{ include "helpers.namespace" . }}
 spec:
   ports:
@@ -25,7 +25,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: "{{ .Release.Name }}-redis"
+  name: {{ .Values.services.redis.name }}
   namespace: {{ include "helpers.namespace" . }}
 spec:
   ports:

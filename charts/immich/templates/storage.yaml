@@ -15,7 +15,7 @@ spec:
     path: "{{ .Values.storage.hostPath }}/{{ .Release.Name }}"
   claimRef:
     namespace: {{ include "helpers.namespace" . }}
-    name: {{ .Release.Name }}
+    name: immich
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -28,7 +28,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Release.Name }}
+  name: immich
   namespace: {{ include "helpers.namespace" . }}
 spec:
   storageClassName: manual
@@ -55,7 +55,7 @@ spec:
     path: "{{ .Values.storage.hostPath }}/{{ .Release.Name }}-model-cache"
   claimRef:
     namespace: {{ include "helpers.namespace" . }}
-    name: {{ .Release.Name }}-model-cache
+    name: immich-model-cache
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -68,7 +68,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Release.Name }}-model-cache
+  name: immich-model-cache
   namespace: {{ include "helpers.namespace" . }}
 spec:
   storageClassName: manual
