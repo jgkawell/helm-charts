@@ -84,6 +84,16 @@ entries:
   immich:
   - apiVersion: v2
     appVersion: v1.101.0
+    created: "2024-08-04T01:32:35.220343857Z"
+    description: A Helm chart for Kubernetes
+    digest: 5e5fce7c8caeb15d80a8a81e20447d163bb39ec5964c2023d17a85ea718a5bed
+    name: immich
+    type: application
+    urls:
+    - https://github.com/jgkawell/helm-charts/releases/download/immich-1.1.1/immich-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
+    appVersion: v1.101.0
     created: "2024-05-09T05:23:40.227433308Z"
     description: A Helm chart for Kubernetes
     digest: 0dd1174f7670c1c970d134f2848d9dd27740bfa31174d50245b69493bced806e
@@ -133,4 +143,4 @@ entries:
     urls:
     - https://github.com/jgkawell/helm-charts/releases/download/postgres-1.0.0/postgres-1.0.0.tgz
     version: 1.0.0
-generated: "2024-05-09T05:23:40.301625089Z"
+generated: "2024-08-04T01:32:35.220380837Z"
