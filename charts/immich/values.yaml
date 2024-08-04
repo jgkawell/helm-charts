@@ -13,7 +13,6 @@ images:
     tag: '6.2.5-alpine'
 
 namespaceOverride: ''
-externalDomain: immich.local
 
 services:
   server:
